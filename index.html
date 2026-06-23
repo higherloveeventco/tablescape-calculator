@@ -1,0 +1,345 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Higher Love Event Co. | Tablescapes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  /* ──────────────────────────────────────────────────────────
+     EDIT THESE FOUR THINGS, then everything works.
+     They are also set in the <script> block at the bottom.
+     ────────────────────────────────────────────────────────── */
+  :root{
+    --cream:#F4EEE2; --cream2:#FBF7EF; --ink:#1C1C1C;
+    --gold:#C1903A; --linen:#E7E0D2; --muted:#8a7f6c;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Montserrat',sans-serif;color:var(--ink);
+    background:radial-gradient(120% 80% at 80% 0%,rgba(193,144,58,.10),transparent 55%),var(--cream);
+    min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:40px 20px 80px}
+  .serif{font-family:'Cormorant Garamond',serif}
+  .wordmark{font-family:'Cormorant Garamond',serif;font-weight:600;letter-spacing:.42em;font-size:13px;
+    text-transform:uppercase;text-align:center;padding-left:.42em}
+  .rule{width:40px;height:1px;background:var(--gold);margin:14px auto 0}
+  .shell{width:100%;max-width:880px}
+  .steps{display:flex;gap:8px;justify-content:center;margin:30px 0 34px;font-size:11px;
+    letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+  .steps b{font-weight:400;color:var(--muted)} .steps b.on{color:var(--gold)} .steps i{opacity:.4;font-style:normal}
+  h1.head{font-family:'Cormorant Garamond',serif;font-weight:500;font-size:44px;line-height:1.04;text-align:center;margin-bottom:8px}
+  .sub{text-align:center;color:var(--muted);font-size:13px;margin:0 auto 30px;max-width:560px;font-weight:300;line-height:1.6}
+  .cards{display:grid;gap:16px;grid-template-columns:repeat(auto-fill,minmax(240px,1fr))}
+  .card{background:var(--cream2);border:1px solid var(--linen);border-radius:16px;padding:22px 22px 20px;cursor:pointer;
+    transition:transform .25s ease,box-shadow .25s ease,border-color .25s ease;display:flex;flex-direction:column;box-shadow:0 2px 10px rgba(28,28,28,.04)}
+  .card:hover{transform:translateY(-3px);box-shadow:0 16px 34px rgba(28,28,28,.10);border-color:rgba(193,144,58,.55)}
+  .card.sel{border-color:var(--gold);box-shadow:0 14px 34px rgba(193,144,58,.18);background:#fff}
+  .swatches{display:flex;gap:7px;margin-bottom:14px}
+  .swatches span{width:22px;height:22px;border-radius:50%;box-shadow:inset 0 0 0 1px rgba(0,0,0,.12)}
+  .pn{font-family:'Cormorant Garamond',serif;font-size:25px;font-weight:600;line-height:1.1}
+  .tg{font-size:11.5px;color:var(--muted);font-weight:300;margin:5px 0 14px;min-height:46px;line-height:1.5}
+  .card ul{list-style:none;display:flex;flex-direction:column;gap:8px;font-size:12px;font-weight:300;flex:1}
+  .card li{position:relative;padding-left:15px;line-height:1.35}
+  .card li:before{content:"";position:absolute;left:0;top:6px;width:5px;height:5px;border-radius:50%;background:var(--gold)}
+  .full{font-size:10.5px;color:var(--muted);font-style:italic;margin-top:10px}
+  .from{margin-top:14px;padding-top:12px;border-top:1px solid var(--linen);font-size:10px;
+    letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+  .from b{font-family:'Cormorant Garamond',serif;font-size:20px;letter-spacing:0;color:var(--ink);font-weight:600}
+  .look{display:block;margin-top:12px;text-align:center;color:var(--ink);text-decoration:none;font-size:10px;letter-spacing:.14em;text-transform:uppercase;border:1px solid var(--linen);border-radius:30px;padding:9px;transition:all .2s}
+  .look:hover{border-color:var(--gold);color:var(--gold)}
+  .panel{background:var(--cream2);border:1px solid var(--linen);border-radius:16px;padding:30px 28px;max-width:560px;margin:0 auto}
+  .stepper{display:flex;align-items:center;justify-content:center;gap:22px;margin:6px 0 8px}
+  .stepper button{width:46px;height:46px;border-radius:50%;border:1px solid var(--linen);background:#fff;font-size:22px;
+    cursor:pointer;color:var(--ink);transition:all .2s;font-family:'Cormorant Garamond',serif}
+  .stepper button:hover{border-color:var(--gold);color:var(--gold)}
+  .gnum{font-family:'Cormorant Garamond',serif;font-size:58px;font-weight:500;min-width:120px;text-align:center}
+  .glabel{text-align:center;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);margin-bottom:22px}
+  .range{width:100%;-webkit-appearance:none;appearance:none;height:2px;background:var(--linen);border-radius:2px;outline:none;margin:4px 0 26px}
+  .range::-webkit-slider-thumb{-webkit-appearance:none;width:20px;height:20px;border-radius:50%;background:var(--gold);
+    cursor:pointer;border:3px solid var(--cream2);box-shadow:0 2px 6px rgba(0,0,0,.18)}
+  .range::-moz-range-thumb{width:20px;height:20px;border-radius:50%;background:var(--gold);cursor:pointer;border:3px solid var(--cream2)}
+  .break{border-top:1px dashed var(--linen);padding-top:18px;margin-top:4px}
+  .row{display:flex;justify-content:space-between;align-items:baseline;font-size:13px;font-weight:300;padding:7px 0}
+  .row .v{font-weight:500}
+  .total{display:flex;justify-content:space-between;align-items:baseline;margin-top:12px;padding-top:14px;border-top:1px solid var(--ink)}
+  .total .lab{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+  .total .amt{font-family:'Cormorant Garamond',serif;font-size:34px;font-weight:600}
+  .pill{display:inline-block;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);
+    border:1px solid var(--gold);border-radius:40px;padding:4px 11px;margin-top:6px}
+  .actions{display:flex;justify-content:space-between;align-items:center;margin-top:28px;gap:14px;max-width:560px;margin-left:auto;margin-right:auto}
+  .btn{background:var(--ink);color:var(--cream);border:none;padding:15px 30px;border-radius:40px;font-family:'Montserrat';
+    font-size:12px;letter-spacing:.14em;text-transform:uppercase;cursor:pointer;transition:all .25s;text-decoration:none;display:inline-block}
+  .btn:hover{background:var(--gold)} .btn[disabled]{opacity:.35;cursor:not-allowed} .btn[disabled]:hover{background:var(--ink)}
+  .back{background:none;border:none;color:var(--muted);font-size:12px;cursor:pointer;letter-spacing:.06em;font-family:'Montserrat'}
+  .back:hover{color:var(--ink)}
+  .note{font-size:11px;color:var(--muted);font-weight:300;text-align:center;margin-top:22px;line-height:1.6}
+  .soon{text-align:center;font-size:11.5px;font-style:italic;color:var(--muted);font-weight:300;margin-bottom:30px;
+    display:flex;align-items:center;justify-content:center;gap:8px}
+  .soon:before{content:"";width:5px;height:5px;border-radius:50%;background:var(--gold);display:inline-block;flex:none}
+  .includes{max-width:680px;margin:26px auto 24px;border:1px solid var(--linen);border-radius:14px;background:var(--cream2);overflow:hidden}
+  .includes summary{cursor:pointer;list-style:none;padding:16px 24px;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);display:flex;justify-content:space-between;align-items:center}
+  .includes summary::-webkit-details-marker{display:none}
+  .includes summary:after{content:"+";color:var(--gold);font-size:17px;line-height:1}
+  .includes[open] summary:after{content:"–"}
+  .incl-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px 34px;padding:8px 26px 4px}
+  .incl-col h4{font-family:'Montserrat',sans-serif;font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin:0 0 12px;font-weight:600}
+  .incl-col ul{list-style:none;display:flex;flex-direction:column;gap:9px}
+  .incl-col li{position:relative;padding-left:15px;font-size:12.5px;font-weight:300;line-height:1.4;color:var(--ink)}
+  .incl-col li:before{content:"";position:absolute;left:0;top:7px;width:4px;height:4px;border-radius:50%;background:var(--gold)}
+  .incl-note{padding:6px 26px 18px;font-size:11px;font-style:italic;font-weight:300;color:var(--muted)}
+  @media (max-width:600px){.incl-grid{grid-template-columns:1fr;gap:18px}}
+  .hide{display:none}
+  .fade{animation:fade .4s ease both}@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+<div class="shell">
+  <div class="wordmark">Higher Love Event Co.</div>
+  <div class="rule"></div>
+  <div class="steps">
+    <b id="s1">Collection</b><i>/</i><b id="s2">Size</b><i>/</i><b id="s3">Reserve</b>
+  </div>
+
+  <!-- STEP 1 -->
+  <section id="step1" class="fade">
+    <h1 class="head serif">Choose your tablescape.</h1>
+    <p class="sub" style="margin-bottom:10px">A tablescape is everything that dresses each guest table: linen, place setting, glassware, candles, and florals. Eight complete looks, sourced, delivered, styled, and cleared.</p>
+    <p class="soon">Coordinating ceremony decor packages are coming soon, so your whole day feels cohesive.</p>
+    <details class="includes" open>
+      <summary>What every table includes</summary>
+      <div class="incl-grid">
+        <div class="incl-col">
+          <h4>The table</h4>
+          <ul>
+            <li>8' poly linen</li>
+            <li>Coordinating runner</li>
+            <li>Coordinating napkins</li>
+            <li>Table number frame</li>
+          </ul>
+        </div>
+        <div class="incl-col">
+          <h4>Each place setting</h4>
+          <ul>
+            <li>Charger</li>
+            <li>Dinner plate</li>
+            <li>Water goblet</li>
+            <li>Dinner fork and knife</li>
+          </ul>
+        </div>
+        <div class="incl-col">
+          <h4>The centerpiece</h4>
+          <ul>
+            <li>6 bud vases with florals</li>
+            <li>6 votives</li>
+            <li>6 tapers, or 8 pillars in glass</li>
+          </ul>
+        </div>
+      </div>
+      <p class="incl-note">Larger floral arrangements for the head table and welcome table available as an add-on.</p>
+    </details>
+    <div class="cards" id="cards"></div>
+    <div class="actions" style="justify-content:flex-end">
+      <button class="btn" id="toStep2" disabled>Continue</button>
+    </div>
+  </section>
+
+  <!-- STEP 2 -->
+  <section id="step2" class="fade hide">
+    <h1 class="head serif">How many guests?</h1>
+    <p class="sub">Your count sets the number of tables. The price is just the math, shown plainly.</p>
+    <div class="panel">
+      <div class="swatches" id="p2sw" style="justify-content:center"></div>
+      <p id="p2name" style="text-align:center;font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600;margin-bottom:18px"></p>
+      <div class="stepper">
+        <button id="minus">&ndash;</button><div class="gnum" id="gnum">80</div><button id="plus">+</button>
+      </div>
+      <div class="glabel">Guests</div>
+      <input class="range" id="range" type="range" min="8" max="300" step="2" value="80" />
+      <div class="break">
+        <div class="row"><span id="p2nameRow"></span><span class="v" id="perTable"></span></div>
+        <div class="row"><span id="p2guests"></span><span class="v" id="tables"></span></div>
+        <div class="row"><span>Size</span><span class="v" id="band"></span></div>
+      </div>
+      <div id="totalWrap" class="total"><span class="lab">Tablescape total</span><span class="amt" id="subtotal"></span></div>
+      <div id="customWrap" class="hide" style="text-align:center;margin-top:18px">
+        <div class="pill">Above 120 guests</div>
+        <p class="note">Larger celebrations get a custom quote so the styling and logistics are right. Let's talk it through.</p>
+      </div>
+    </div>
+    <div class="actions">
+      <button class="back" id="backTo1">&larr; Collection</button>
+      <button class="btn" id="toStep3">Reserve this</button>
+    </div>
+  </section>
+
+  <!-- STEP 3 -->
+  <section id="step3" class="fade hide">
+    <h1 class="head serif" id="p3head">Continue to your booking.</h1>
+    <p class="sub" id="p3sub">Next, choose your planning package and add the $500 tablescape reserve. Your collection and guest count carry over.</p>
+    <div class="panel">
+      <div class="swatches" id="p3sw" style="justify-content:center"></div>
+      <p id="p3name" style="text-align:center;font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600;margin-bottom:18px"></p>
+      <div id="p3summary"></div>
+    </div>
+    <div class="actions">
+      <button class="back" id="backTo2">&larr; Size</button>
+      <a class="btn" id="reserveBtn" href="#">Continue to booking</a>
+    </div>
+    <p class="note">This takes you to booking with your collection and guest count already filled in. You choose your planning package and add the $500 tablescape reserve there.</p>
+  </section>
+</div>
+
+<script>
+/* ──────────────────────────────────────────────────────────
+   1) PASTE YOUR ACUITY DETAILS HERE
+   ────────────────────────────────────────────────────────── */
+const ACUITY = {
+  // The Acuity scheduler link that "Continue to booking" opens.
+  base: "https://app.acuityscheduling.com/schedule.php?owner=39373577&appointmentType=category:Higher%20Love%20Event%20Co.%20Wedding%20Planning%20Packages",
+  collectionFieldId: "18715524",     // shared intake field ID for the Collection question
+  guestFieldId: "18733420",          // shared intake field ID for the guest count question
+  sourceFieldId: "18733429",         // shared intake field ID for the Referral Source question
+  source: ""                         // set automatically from the page URL, see SOURCES below
+};
+// Referral tagging from the URL. Embed this same file with ?src=weddinglandia on the
+// Weddinglandia page and bookings get stamped Weddinglandia. The public embed needs no
+// parameter and stays untagged. One file, no second copy to keep in sync.
+const SOURCES = { weddinglandia: "Weddinglandia" };
+ACUITY.source = SOURCES[new URLSearchParams(location.search).get("src")] || "";
+const INQUIRY_EMAIL = "hello@higherloveeventco.com"; // for 120+ custom quotes
+
+/* 2) YOUR NUMBERS. price = client price per table, set directly.
+   cost = your per-table cost, kept only so you can see your margin. */
+const GUESTS_PER_TABLE = 8, RESERVE_FEE = 500;
+const PACKAGES = [
+  {id:"midnight",name:"Midnight Romance",cost:370.45,price:410,canva:"https://canva.link/w0ocoveub7fbfn7",tagline:"Black linen, aubergine, and gold. Candlelit and dramatic.",
+   palette:["#1C1C1C","#4A2C3A","#C1903A"],highlights:["Black linen, black chiffon runner","Aubergine napkins, gold flatware","Gold lacquer chargers, noir plates","Gold-rim water goblets","Gold tapers, votives, and bud vase florals"]},
+  {id:"garden",name:"Garden Party",cost:349.65,price:385,canva:"https://canva.link/bfl6m7gst7yhkqr",tagline:"White linen, celadon, and rattan. Fresh and sunlit.",
+   palette:["#F7F4EC","#AEBFA9","#A9C2D8","#C9A878","#D8A7A0"],highlights:["White linen, soft blue gauze runner","Celadon napkins, silver flatware","Natural rattan placemats, pearl plates","Soft blue goblets","Rose tapers, votives, and bud vase florals"]},
+  {id:"boho",name:"Warm Bohemian",cost:351.25,price:390,canva:"https://canva.link/prhsbn2dxn4iv4j",tagline:"Olive, copper, and amber. Earthy and warm.",
+   palette:["#6B6F4A","#B07A4F","#C8893F"],highlights:["Olive linen, ivory gauze runner","Copper napkins, gold flatware","Dark rattan placemats, snow plates","Amber goblets","Pillar candles, votives, and bud vase florals"]},
+  {id:"refined",name:"Refined Rustic",cost:357.35,price:395,canva:"https://canva.link/p418a4qvjkrxi5j",tagline:"White linen, moss, and warm wood. Organic and grounded.",
+   palette:["#F7F4EC","#6B6F4A","#8A5A3B","#7D7B78"],highlights:["White linen, ivory gauze runner","Moss napkins, silver flatware","Wood grain chargers, lace-edge plates","Smoke goblets","Pillar candles, votives, and amber bud vase florals"]},
+  {id:"soft",name:"Soft & Simple",cost:294.15,price:325,canva:"https://canva.link/uz7decdgr9irde3",tagline:"Ivory and white, pared back. Understated and serene.",
+   palette:["#EFE7D8","#F7F4EC","#E7E0D2"],highlights:["Ivory linen, white chiffon runner","White hemstitch napkins, silver flatware","Snow stoneware dinner and salad plates","Prism water goblets","Floating candles, votives, and bud vase florals"]},
+  {id:"blush",name:"First Blush",cost:350.45,price:390,canva:"https://canva.link/wb7jib75omfuo01",tagline:"Ivory and blush with whitewashed wood. Soft and romantic.",
+   palette:["#EFE7D8","#E3B9B3","#CDBFA8"],highlights:["Ivory linen, white chiffon runner","Blush satin napkins","Whitewash wood chargers, Monet china plates","Clear goblets","Pillar candles, votives, and bud vase florals"]},
+  {id:"vineyard",name:"Modern Vineyard",cost:392.85,price:435,canva:"https://canva.link/63o9v3eytfsurpf",tagline:"Leaf velvet, dark rattan, and magenta tapers. Lush and vivid.",
+   palette:["#5E6B4A","#9C6B43","#A63D6A","#F7F4EC"],highlights:["White linen, white chiffon runner","Leaf velvet napkins, silver flatware","Dark rattan placemats, pearl plates","Prism water goblets","Magenta tapers, votives, and clear bud vase florals"]},
+  {id:"fresh",name:"Fresh & Minimal",cost:329.85,price:365,canva:"https://canva.link/8ek7ct6n8bbciu8",tagline:"White, silver, and a touch of green. Crisp and clean.",
+   palette:["#F7F4EC","#CFCABE","#6E7A57"],highlights:["White linen, white chiffon runner","Leaf velvet napkins, silver flatware","White and silver chargers and plates","Prism water goblets","Floating candles, votives, and bud vase florals"]}
+];
+const BANDS = [{name:"Intimate",max:50},{name:"Classic",max:100},{name:"Grand",max:120}];
+
+/* ── logic ── */
+const state = {step:1, pkgId:null, guests:80};
+const $ = s => document.querySelector(s);
+const priceOf = p => p.price;
+const money = n => n.toLocaleString("en-US",{style:"currency",currency:"USD",minimumFractionDigits:2});
+const bandFor = g => { for(const b of BANDS) if(g<=b.max) return b.name; return "Custom"; };
+const pkg = () => PACKAGES.find(p=>p.id===state.pkgId);
+const swHTML = arr => arr.map(c=>`<span style="background:${c}"></span>`).join("");
+
+function showStep(n){
+  state.step=n;
+  $("#step1").classList.toggle("hide",n!==1);
+  $("#step2").classList.toggle("hide",n!==2);
+  $("#step3").classList.toggle("hide",n!==3);
+  $("#s1").className=n===1?"on":""; $("#s2").className=n===2?"on":""; $("#s3").className=n>=3?"on":"";
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+
+/* step 1 */
+function renderCards(){
+  $("#cards").innerHTML = PACKAGES.map(p=>`
+    <div class="card${state.pkgId===p.id?' sel':''}" data-id="${p.id}">
+      <div class="swatches">${swHTML(p.palette)}</div>
+      <div class="pn">${p.name}</div>
+      <div class="tg">${p.tagline}</div>
+      <ul>${p.highlights.map(h=>`<li>${h}</li>`).join("")}</ul>
+      <div class="from">From <b>${money(priceOf(p))}</b> / table</div>
+      <a class="look" href="${p.canva}" target="_blank" rel="noopener" onclick="event.stopPropagation()">View the full look &#8599;</a>
+    </div>`).join("");
+  document.querySelectorAll(".card").forEach(c=>c.addEventListener("click",()=>{
+    state.pkgId=c.dataset.id; renderCards(); $("#toStep2").disabled=false;
+  }));
+}
+
+/* step 2 */
+function updateStep2(){
+  const p=pkg(); if(!p) return;
+  const tables=Math.ceil(state.guests/GUESTS_PER_TABLE);
+  const band=bandFor(state.guests);
+  const custom=band==="Custom";
+  $("#gnum").textContent=state.guests;
+  $("#range").value=state.guests;
+  $("#perTable").textContent=money(priceOf(p))+" / table";
+  $("#p2guests").textContent=`${state.guests} guests at ${GUESTS_PER_TABLE} per table`;
+  $("#tables").textContent=tables+" tables";
+  $("#band").textContent=band;
+  $("#subtotal").textContent=money(priceOf(p)*tables);
+  $("#totalWrap").classList.toggle("hide",custom);
+  $("#customWrap").classList.toggle("hide",!custom);
+  $("#toStep3").textContent = custom ? "Request a quote" : "Reserve this";
+}
+function enterStep2(){
+  const p=pkg(); $("#p2sw").innerHTML=swHTML(p.palette);
+  $("#p2name").textContent=p.name; $("#p2nameRow").textContent=p.name;
+  updateStep2(); showStep(2);
+}
+
+/* step 3 */
+function buildBookingUrl(){
+  const p=pkg();
+  const sep = ACUITY.base.includes("?") ? "&" : "?";
+  const parts=[
+    "field:"+ACUITY.collectionFieldId+"="+encodeURIComponent(p.name),
+    "field:"+ACUITY.guestFieldId+"="+encodeURIComponent(state.guests)
+  ];
+  if(ACUITY.sourceFieldId && ACUITY.source){
+    parts.push("field:"+ACUITY.sourceFieldId+"="+encodeURIComponent(ACUITY.source));
+  }
+  return ACUITY.base+sep+parts.join("&");
+}
+function enterStep3(){
+  const p=pkg();
+  const tables=Math.ceil(state.guests/GUESTS_PER_TABLE);
+  const band=bandFor(state.guests);
+  const custom=band==="Custom";
+  const subtotal=priceOf(p)*tables;
+  $("#p3sw").innerHTML=swHTML(p.palette); $("#p3name").textContent=p.name;
+  const btn=$("#reserveBtn");
+
+  if(custom){
+    $("#p3head").textContent="Tell me about your day.";
+    $("#p3sub").textContent="Share a few details and I'll send a custom quote within two business days.";
+    $("#p3summary").innerHTML=`<div class="row"><span>${p.name}, ${state.guests} guests, ${tables} tables</span><span class="v">Custom</span></div>`;
+    btn.textContent="Request a quote";
+    btn.href="mailto:"+INQUIRY_EMAIL+"?subject="+encodeURIComponent("Tablescape quote request")
+      +"&body="+encodeURIComponent(`Collection: ${p.name}\nGuests: ${state.guests}\nTables: ${tables}\n\nMy wedding date and venue are: `);
+  } else {
+    $("#p3head").textContent="Continue to your booking.";
+    $("#p3sub").textContent="Next, choose your planning package and add the $500 tablescape reserve. Your collection and guest count carry over.";
+    $("#p3summary").innerHTML=`
+      <div class="break"><div class="row"><span>${p.name}, ${band}, ${tables} tables</span><span class="v">${money(subtotal)}</span></div>
+      <div class="row" style="color:var(--muted)"><span>+ delivery</span><span>added once Arden quotes</span></div></div>
+      <div class="total"><span class="lab">Tablescape estimate</span><span class="amt">${money(subtotal)}</span></div>
+      <div class="row" style="justify-content:flex-end;color:var(--muted)">$500 tablescape reserve added at booking, balance invoiced before delivery</div>`;
+    btn.textContent="Continue to booking";
+    btn.href=buildBookingUrl();
+  }
+  showStep(3);
+}
+
+/* events */
+renderCards();
+$("#toStep2").addEventListener("click",enterStep2);
+$("#backTo1").addEventListener("click",()=>showStep(1));
+$("#toStep3").addEventListener("click",enterStep3);
+$("#backTo2").addEventListener("click",()=>showStep(2));
+$("#minus").addEventListener("click",()=>{state.guests=Math.max(8,state.guests-8);updateStep2();});
+$("#plus").addEventListener("click",()=>{state.guests=Math.min(300,state.guests+8);updateStep2();});
+$("#range").addEventListener("input",e=>{state.guests=Number(e.target.value);updateStep2();});
+</script>
+</body>
+</html>
